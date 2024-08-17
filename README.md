@@ -15,4 +15,4 @@
 - **15-8-24 - v1.0.1:** Release Date.
 
 ## Upcoming
-- **v1.0.4:** Tweaking and making it more user friendly
+- **v1.0.4:** Fixing rounding off large results (814553330390838100000000000000000000000000000)
