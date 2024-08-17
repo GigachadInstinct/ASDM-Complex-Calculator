@@ -10,8 +10,9 @@
 - **Basic Arithmetic:** Handles addition, subtraction, multiplication, and division with built-in checks (like division by zero).
 
 ## Update Log
+- **17-8-24 - v1.0.3:** Fixed floating-point precision error, Fixed decimal errors.
 - **16-8-24 - v1.0.2:** Faster Booting speed, Changed input, Can detect inputs that are not possible, Allows decimal.
 - **15-8-24 - v1.0.1:** Release Date.
 
 ## Upcoming
-- **v1.0.3:** Tweaking and fixing bugs, not much.
+- **v1.0.4:** Tweaking and making it more user friendly
