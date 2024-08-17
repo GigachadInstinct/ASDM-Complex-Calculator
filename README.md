@@ -8,3 +8,10 @@
 - **Comprehensive Error Handling:** Ensures only valid numeric inputs are accepted, preventing runtime errors.
 - **Flexible Operation Input:** Supports multiple ways to specify operations, including keywords like "addition" or symbols like "+".
 - **Basic Arithmetic:** Handles addition, subtraction, multiplication, and division with built-in checks (like division by zero).
+
+## Update Log
+- **16-8-24 - v1.0.2:** Faster Booting speed, Changed input, Can detect inputs that are not possible, Allows decimal.
+- **15-8-24 - v1.0.1:** Release Date.
+
+## Upcoming
+- **v1.0.3:** Tweaking and fixing bugs, not much.
