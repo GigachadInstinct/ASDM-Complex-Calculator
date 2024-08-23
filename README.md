@@ -1,6 +1,7 @@
 # ASDM Complex Calculator
 
 **ASDM Complex Calculator** is an interactive Python program designed to perform addition, subtraction, division, and multiplication of numbers with a touch of personalization and user engagement.
+We just passed 100 lines of code in `v1.0.4`!
 
 ## Features
 
@@ -30,9 +31,3 @@
 ## Upcoming
 - **Python-v1.0.5:** idk lol.
 - **HTML:** Everytime changes after many new python versions is released.
-
-Here are all the features changed in this version:
-
-
-
-These changes enhance user interaction, increase flexibility in input handling, and improve overall code clarity.
