@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASDM Complex Calculator</title>
+    <link rel="icon" href="F:\Abhay\Random Stuff\Scripts\ASDM Complex\Assets\icons8-calculator-48 (3).png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/favicon.js@0.4.0/dist/favicon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.3.1/decimal.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .container {
+            background-color: #2c2c2c;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #61dafb;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+        input, select {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            font-size: 1rem;
+            background-color: #3a3a3a;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #61dafb;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            background-color: #61dafb;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #4fa8d5;
+        }
+        .loading-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #3a3a3a;
+            border-radius: 2px;
+            margin-top: 1rem;
+            overflow: hidden;
+            display: none;
+        }
+        .loading-progress {
+            width: 0;
+            height: 100%;
+            background-color: #61dafb;
+            transition: width 0.5s ease-in-out;
+        }
+        #calculatorInterface {
+            display: none;
+            margin-top: 1rem;
+        }
+        #result {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ASDM Complex Calculator</h1>
+        <div id="nameInput">
+            <input type="text" id="userName" placeholder="Enter your name">
+            <button onclick="submitName()">Submit</button>
+        </div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <div id="calculatorInterface">
+            <input type="text" id="numberOne" placeholder="Enter first number">
+            <input type="text" id="numberTwo" placeholder="Enter second number">
+            <select id="operation">
+                <option value="+">Addition (+)</option>
+                <option value="-">Subtraction (-)</option>
+                <option value="*">Multiplication (*)</option>
+                <option value="/">Division (/)</option>
+            </select>
+            <button onclick="calculate()">Calculate</button>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        // Set precision for decimal operations
+        Decimal.set({ precision: 16 });
+
+        function submitName() {
+            const nameInput = document.getElementById('nameInput');
+            const loadingBar = document.querySelector('.loading-bar');
+            const loadingProgress = document.querySelector('.loading-progress');
+            const calculatorInterface = document.getElementById('calculatorInterface');
+            const user = document.getElementById('userName').value.trim();
+
+            if (user !== '') {
+                nameInput.style.display = 'none';
+                loadingBar.style.display = 'block';
+
+                console.log(user + "/Activating.....");
+                let load = 0;
+                const interval = setInterval(() => {
+                    const randomIncrement = Math.floor(Math.random() * 20) + 1;
+                    load += randomIncrement;
+                    load = Math.min(load, 100);
+                    loadingProgress.style.width = `${load}%`;
+                    console.log(load + "%");
+
+                    if (load >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            loadingBar.style.display = 'none';
+                            calculatorInterface.style.display = 'block';
+                            calculatorInterface.classList.add('fade-in');
+                            console.log("ASDM Complex has booted...");
+                            console.log("Welcome " + user + "!");
+                        }, 500);
+                    }
+                }, Math.random() * 500);
+            }
+        }
+
+        function checkNumber(value) {
+            try {
+                new Decimal(value);
+                return true;
+            } catch (error) {
+                console.log("Error: The value is not a valid number.");
+                return false;
+            }
+        }
+
+        function calculate() {
+            const numberOneInput = document.getElementById('numberOne').value;
+            const numberTwoInput = document.getElementById('numberTwo').value;
+            const operation = document.getElementById('operation').value;
+            let result;
+
+            if (checkNumber(numberOneInput) && checkNumber(numberTwoInput)) {
+                const numberOne = new Decimal(numberOneInput);
+                const numberTwo = new Decimal(numberTwoInput);
+
+                switch (operation) {
+                    case "+":
+                        result = numberOne.plus(numberTwo);
+                        break;
+                    case "-":
+                        result = numberOne.minus(numberTwo);
+                        break;
+                    case "*":
+                        result = numberOne.times(numberTwo);
+                        break;
+                    case "/":
+                        if (numberTwo.isZero()) {
+                            result = "Error: Division by zero is not allowed.";
+                        } else {
+                            result = numberOne.dividedBy(numberTwo);
+                        }
+                        break;
+                }
+
+                if (result instanceof Decimal) {
+                    // Check if the result is a whole number
+                    if (result.isInteger()) {
+                        result = result.toNumber();
+                    } else {
+                        // Remove trailing zeros and unnecessary decimal point
+                        result = result.toDecimalPlaces(15).toString();
+                        result = result.replace(/\.?0+$/, "");
+                    }
+                }
+            } else {
+                result = "Error: Please enter valid numbers.";
+            }
+
+            const resultElement = document.getElementById('result');
+            resultElement.textContent = "Result: " + result;
+            resultElement.classList.add('fade-in');
+            setTimeout(() => resultElement.classList.remove('fade-in'), 500);
+        }
+    </script>
+</body>
+</html>
